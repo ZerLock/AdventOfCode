@@ -20,14 +20,15 @@ func main() {
 	fileString := string(fileBytes)
 	rounds := strings.Split(fileString, "\n")
 	points := 0
+	ecard := 'X' - 'A'
 
 	for _, round := range rounds {
 		enemy := round[0]
-		me := round[2] - ('X' - 'A')
+		me := round[2] - byte(ecard)
 		points += getPoints[me]
 		if enemy == me {
 			points += 3
-		} else if (me-enemy == 1) || (enemy == 'C' && me == 'A') {
+		} else if (enemy < me) || (enemy == 'A' && me == 'C') {
 			points += 6
 		}
 	}
